@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Web App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to My Go Web App</h1>
+
+        {{if .Name}}
+        <h2>Hello, {{.Name}}!</h2>
+        <p>Your message: {{.Message}}</p>
+        {{else}}
+        <form method="post" action="/">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+        {{end}}
+    </div>
+</body>
+</html>
