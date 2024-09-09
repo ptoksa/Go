@@ -31,13 +31,13 @@ This project uses Go modules for dependency management. Install the required pac
 go mod tidy
 ```
 ### 3. Configure PostgreSQL
-Create a PostgreSQL database and user for the application:
-```bash
+Create a PostgreSQL database and user for the application:  
+```
 sudo -u postgres psql
 CREATE DATABASE cruddb;
 CREATE USER petri WITH PASSWORD 'yourpassword';
 GRANT ALL PRIVILEGES ON DATABASE cruddb TO 'user';
-```
+```  
 Make sure to replace 'yourpassword' with your actual password. The database connection string in the Go app should be updated accordingly.
 ### 4. Run the Application
 To start the server, use:
