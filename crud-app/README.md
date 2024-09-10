@@ -1,6 +1,6 @@
 # Go CRUD App with PostgreSQL
 
-This is a simple CRUD (Create, Read, Update, Delete) web application built using Go and PostgreSQL. The app uses the Gorilla Mux router for routing and interacts with a PostgreSQL database for data persistence.
+TThis is a simple CRUD (Create, Read, Update, Delete) web application built using Go and PostgreSQL. The app uses the Gorilla Mux router for routing and interacts with a PostgreSQL database for data persistence. It also provides a web GUI for managing users.
 
 ## Features
 
@@ -8,6 +8,7 @@ This is a simple CRUD (Create, Read, Update, Delete) web application built using
 - Read and display records
 - Update existing records
 - Delete records from the database
+- Web GUI for user management
 
 ## Prerequisites
 
@@ -32,7 +33,7 @@ go mod tidy
 ```
 ### 3. Configure PostgreSQL
 Create a PostgreSQL database and user for the application:  
-```
+```bash
 sudo -u postgres psql
 CREATE DATABASE cruddb;
 CREATE USER petri WITH PASSWORD 'yourpassword';
@@ -41,26 +42,28 @@ GRANT ALL PRIVILEGES ON DATABASE cruddb TO 'user';
 Make sure to replace 'yourpassword' with your actual password. The database connection string in the Go app should be updated accordingly.
 ### 4. Run the Application
 To start the server, use:
-```sh
+```bash
 go run main.go
 ```
 The application will be running on `localhost:8080`.
+# Access the Web GUI
+Open your web browser and navigate to `http://localhost:8080`. You will see a simple web interface to manage users with functionalities to create, update, and delete user records.
 # API Endpoints
-- `GET /people` - Retrieve all people
-- `GET /people/{id}` - Retrieve a person by ID
-- `POST /people` - Create a new person (requires a JSON payload)
-- `PUT /people/{id}` - Update a person by ID (requires a JSON payload)
-- `DELETE /people/{id}` - Delete a person by ID
+- `GET /users` - Retrieve all users
+- `GET /users/{id}` - Retrieve a user by ID
+- `POST /users` - Create a new user (requires a JSON payload)
+- `PUT /users/{id}` - Update a user by ID (requires a JSON payload)
+- `DELETE /users/{id}` - Delete a user by ID
 # Example Request Payloads
-## Create a New Person (POST /people)
-```sh
+## Create a New User (POST /users)
+```bash
 {
     "firstname": "John",
     "lastname": "Doe"
 }
 ```
-## Update a Person (PUT /people/{id})
-```sh
+## Update a User (PUT /users/{id})
+```bash
 {
     "firstname": "Jane",
     "lastname": "Doe"
@@ -74,3 +77,5 @@ The following environment variables can be set for configuring the database conn
 - `DB_HOST` - Host of the PostgreSQL database (default: `localhost`)
 - `DB_PORT` - Port of the PostgreSQL database (default: `5432`)
 You can set these variables in your .env file or export them in your shell session.
+# Screenshots
+![front](front.jpg)

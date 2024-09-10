@@ -10,6 +10,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jackc/pgx/v4"
+	"github.com/gorilla/handlers"
 )
 
 // Database connection string
@@ -140,6 +141,21 @@ func main() {
     r.HandleFunc("/users/{id}", updateUser).Methods("PUT")
     r.HandleFunc("/users/{id}", deleteUser).Methods("DELETE")
 
+    // Serve static HTML file
+    r.HandleFunc("/", serveStatic)
+
+    // CORS settings
+    corsHandler := handlers.CORS(
+        handlers.AllowedOrigins([]string{"*"}), // Allow all origins
+        handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}),
+        handlers.AllowedHeaders([]string{"Content-Type"}),
+    )(r)
+
     fmt.Println("Server is running on port 8080")
-    log.Fatal(http.ListenAndServe(":8080", r))
+    log.Fatal(http.ListenAndServe(":8080", corsHandler))
+}
+
+// Serve static files from the current directory
+func serveStatic(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "index.html")
 }
